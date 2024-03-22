@@ -32,12 +32,12 @@ async function getContent(searchParams: SearchParams) {
     data.client = await copilot.retrieveClient({ id: tokenPayload.clientId });
   }
   if (tokenPayload?.companyId) {
-    data.client = await copilot.retrieveCompany({
+    data.company = await copilot.retrieveCompany({
       id: tokenPayload.companyId,
     });
   }
   if (tokenPayload?.internalUserId) {
-    data.client = await copilot.retrieveInternalUser({
+    data.internalUser = await copilot.retrieveInternalUser({
       id: tokenPayload.internalUserId,
     });
   }

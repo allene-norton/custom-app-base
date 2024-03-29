@@ -1,6 +1,7 @@
 import { copilotApi } from 'copilot-node-sdk';
 import { need } from '@/utils/need';
 import { TokenGate } from '@/components/TokenGate';
+import Dashboard from '@/components/Dashboard'
 
 const API_KEY = need<string>(process.env.COPILOT_API_KEY);
 
@@ -52,7 +53,7 @@ async function getContent(searchParams: SearchParams) {
 async function Content({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
   const allClients = data.allClients.data
-  console.log(allClients)
+  // console.log(typeof(allClients.data))
   // Console log the data to see what's available
   // You can see these logs in the terminal where
   // you run `yarn dev`
@@ -69,8 +70,10 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
             </code>
           )}
         </p>
-        
       </div>
+      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <Dashboard clients={allClients} />
+    </div>
     </main>
   );
 }

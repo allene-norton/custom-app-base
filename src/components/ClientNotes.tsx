@@ -6,7 +6,6 @@ interface Client {
   id: string;
   givenName: string;
   familyName: string;
-  notes: string;
 }
 
 interface ClientNotesProps {
@@ -27,7 +26,7 @@ const ClientNotes: React.FC<ClientNotesProps> = ({ clients }) => {
       <div className="overflow-x-auto w-1/2">
         <Table clients={clients} onClientClick={handleClientClick} />
       </div>
-      <div className="w-1/2">
+      <div className="w-50 px-40">
         <Notes client={selectedClient} />
       </div>
     </div>

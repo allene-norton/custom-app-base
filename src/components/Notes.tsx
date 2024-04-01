@@ -12,10 +12,12 @@ interface NotesProps {
 
 const Notes: React.FC<NotesProps> = ({ client }) => {
   const [inputNotes, setInputNotes] = useState('');
+  const [prevNotes, setPrevNotes] = useState('');
 
   useEffect(() => {
     if (client) {
-      console.log(`notesClient: ${client.id}`)
+      setPrevNotes(localStorage.getItem(client.id)|| '')
+      setInputNotes('');
     } else {
       setInputNotes('');
     }
@@ -28,16 +30,19 @@ const Notes: React.FC<NotesProps> = ({ client }) => {
   const handleSaveNotes = () => {
     if (client) {
       console.log(`notes saved: ${inputNotes}`)
+      localStorage.setItem(client.id, inputNotes)
+      setPrevNotes(inputNotes)
+      setInputNotes('')
     }
   };
 
   return (
     <div>
-      <h2>Client Notes</h2>
+      {/* <h2>Client Notes</h2> */}
       {client ? (
         <div>
-          <p>Client: {client.givenName} {client.familyName}</p>
-          <p>{client.id}</p>
+          <h2 className='text-xl'>{client.givenName} {client.familyName}</h2>
+          <p>Recent notes: "{prevNotes}"</p>
           <textarea
             rows={5}
             cols={50}

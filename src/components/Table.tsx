@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface Client {
+  id: string;
   givenName: string;
   familyName: string;
 }

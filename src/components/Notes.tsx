@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 interface Client {
-  id: number;
+  id: string;
   givenName: string;
   familyName: string;
-  notes: string;
 }
 
 interface NotesProps {
   client: Client | null;
-  onSaveNotes: (clientId: number, notes: string) => void;
-  savedNotes: string;
 }
 
-const Notes: React.FC<NotesProps> = ({ client, onSaveNotes }) => {
+const Notes: React.FC<NotesProps> = ({ client }) => {
   const [inputNotes, setInputNotes] = useState('');
 
   useEffect(() => {
     if (client) {
-      setInputNotes(client.notes);
-      console.log(client.notes)
+      console.log(`notesClient: ${client.id}`)
     } else {
       setInputNotes('');
     }
@@ -31,7 +27,7 @@ const Notes: React.FC<NotesProps> = ({ client, onSaveNotes }) => {
 
   const handleSaveNotes = () => {
     if (client) {
-      onSaveNotes(client.id, inputNotes);
+      console.log(`notes saved: ${inputNotes}`)
     }
   };
 
@@ -41,6 +37,7 @@ const Notes: React.FC<NotesProps> = ({ client, onSaveNotes }) => {
       {client ? (
         <div>
           <p>Client: {client.givenName} {client.familyName}</p>
+          <p>{client.id}</p>
           <textarea
             rows={5}
             cols={50}
